@@ -727,6 +727,12 @@ legend { padding: 0; margin-bottom: 8px; }
     replay.addEventListener("click", sweep);
   }
 
+  /* Meta Pixel events */
+  function track(name, params) { if (window.fbq) fbq("track", name, params); }
+  document.querySelectorAll('a[href="#start"]').forEach(function (a) {
+    a.addEventListener("click", function () { track("ViewContent", { content_name: "Start a repair" }); });
+  });
+
   /* Repair request form */
   var REQUEST_EMAIL = "repairs@millersrepairco.com";
   // When this page is hosted on your own domain, set this to your form service URL (for example a Formspree form endpoint).
@@ -781,6 +787,8 @@ legend { padding: 0; margin-bottom: 8px; }
     e.preventDefault();
     if (!form.reportValidity()) return;
     var text = buildSummary();
+    var svc = form.querySelector('input[name="service"]:checked');
+    track("Lead", { content_name: svc ? svc.value : "Not sure, help me choose" });
     if (!REQUEST_ENDPOINT) { showManual(text); return; }
     submitBtn.disabled = true;
     submitBtn.textContent = "Sending…";
