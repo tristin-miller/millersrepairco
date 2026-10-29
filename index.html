@@ -42,7 +42,8 @@ src="https://www.facebook.com/tr?id=1459928006084333&ev=PageView&noscript=1"
   --font-body: "Public Sans", "Segoe UI", system-ui, sans-serif;
   --font-mono: "IBM Plex Mono", ui-monospace, Menlo, Consolas, monospace;
 }
-@media (prefers-color-scheme: dark) {
+/* Dark theme is desktop-only; phones always get the light theme. */
+@media (prefers-color-scheme: dark) and (min-width: 821px) {
   :root:not([data-theme="light"]) {
     --paper: #0D1318;
     --surface: #141C23;
@@ -61,6 +62,7 @@ src="https://www.facebook.com/tr?id=1459928006084333&ev=PageView&noscript=1"
     color-scheme: dark;
   }
 }
+@media (min-width: 821px) {
 :root[data-theme="dark"] {
   --paper: #0D1318;
   --surface: #141C23;
@@ -77,6 +79,7 @@ src="https://www.facebook.com/tr?id=1459928006084333&ev=PageView&noscript=1"
   --face-dim: #6E8090;
   --needle: #F0A11C;
   color-scheme: dark;
+}
 }
 
 *, *::before, *::after { box-sizing: border-box; }
@@ -297,6 +300,61 @@ legend { padding: 0; margin-bottom: 8px; }
 .footer-inner { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px 24px; padding-block: 28px; font-size: 14px; color: var(--muted); }
 .footer strong { color: var(--ink); font-weight: 600; }
 .select-all { user-select: all; }
+
+/* Phones: fewer things per row, more air between them */
+@media (max-width: 600px) {
+  body { font-size: 16px; line-height: 1.6; }
+  .masthead-inner { padding-block: 12px; }
+  .brand-loc { display: none; }
+  .nav .btn { min-height: 38px; padding: 0 14px; }
+
+  .hero-grid { gap: 32px; padding-block: 32px 40px; }
+  .hero-copy { gap: 16px; }
+  .eyebrow { font-size: 11px; letter-spacing: 0.1em; }
+  .lede { font-size: 16.5px; }
+  .actions { flex-direction: column; gap: 10px; margin-top: 8px; }
+  .actions .btn { width: 100%; min-height: 50px; }
+  .facts { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; margin-top: 8px; }
+  .facts dt { font-size: 10px; letter-spacing: 0.08em; }
+  .facts div { align-content: start; }
+  .facts dd { font-size: 17px; line-height: 1.25; }
+  .hero-gauge svg { max-width: 220px; }
+  .hero-gauge figcaption { font-size: 13.5px; }
+
+  .section { padding-block: 44px; }
+  .section-head { margin-bottom: 24px; }
+  .faults { gap: 16px; }
+  .faults li { font-size: 16px; }
+  .steps { gap: 24px; }
+  .steps li { grid-template-columns: 34px minmax(0, 1fr); column-gap: 14px; row-gap: 4px; }
+  .steps .step-num { grid-row: span 2; }
+
+  /* Coverage table becomes stacked cards so nothing scrolls sideways */
+  .table-wrap { overflow: visible; background: none; border: 0; }
+  table, tbody, tr, td { display: block; min-width: 0; }
+  thead { display: none; }
+  tbody { display: grid; gap: 12px; }
+  tr { background: var(--surface); border: 1px solid var(--rule); border-radius: 4px; padding: 16px; }
+  td { border: 0; padding: 0; }
+  td:first-child { font-family: var(--font-display); font-size: 18px; font-weight: 720; margin-bottom: 4px; }
+  td.years { margin-top: 6px; color: var(--muted); font-family: var(--font-mono); font-size: 13.5px; }
+  .years small { display: inline; font-family: var(--font-body); }
+  .years small::before { content: " · "; }
+
+  .plans { gap: 16px; }
+  .plan { padding: 22px 20px; gap: 14px; }
+  .price { font-size: 38px; }
+  .promises { gap: 22px; margin-top: 36px; padding-top: 28px; }
+
+  .start-grid { gap: 22px; }
+  .form-card { padding: 20px 16px; }
+  .fields { gap: 16px; }
+  .form-foot { flex-direction: column; align-items: stretch; text-align: center; }
+  .form-foot .btn { width: 100%; min-height: 50px; }
+
+  .faq summary { padding: 16px 0; font-size: 16px; }
+  .footer-inner { flex-direction: column; gap: 8px; padding-block: 24px; }
+}
 </style>
 
 <header class="masthead">
